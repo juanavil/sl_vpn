@@ -1,0 +1,15 @@
+FROM centos:centos6
+
+#Update OS
+RUN yum -y update && yum install -y net-tools nmap ping-utils wget curl
+
+# copy over our app code
+COPY ./vpn /usr/local/bin/vpn
+COPY ./Connection.sh /usr/local/bin
+COPY ./CloseVPN.sh /usr/local/bin
+
+# Define working directory
+WORKDIR /usr/local/bin
+
+RUN chown root:root vpn/array*
+RUN chmod 4755 vpn/array*
