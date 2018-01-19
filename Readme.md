@@ -15,6 +15,10 @@ sudo docker attach centos6_sl_vpn
 
 ## Once connected to the container you will be able to use the scripts:
 
-Connection.sh ocervant.278462 'Mypassword' #To connecto to the VPN
+### To connecto to the VPN
 
-CloseVPN.sh #To close the VPN connection
+Connection.sh ocervant.278462 'Mypassword' 
+
+### To close the VPN connection
+
+CloseVPN.sh 
