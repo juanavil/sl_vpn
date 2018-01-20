@@ -22,6 +22,6 @@ Connection.sh ocervant.278462 'Mypassword'
 
 CloseVPN.sh
 
-## Execute the Connection.sh script to connect to the VPN inside the container, it will create the VPN connection on the container, you must be attached to the container to use it
+### Execute the Connection.sh script to connect to the VPN inside the container, it will create the VPN connection on the container, you must be attached to the container to use it
 
 sudo docker exec centos6_sl_vpn /bin/sh -c "Connection.sh dstadmin-vpn.ibm278462.12 'h/VPf1Lhl'" & 
