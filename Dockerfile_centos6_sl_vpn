@@ -1,7 +1,7 @@
 FROM centos:centos6
 
 #Update OS
-RUN yum -y update && yum install -y net-tools nmap ping-utils wget curl
+RUN yum -y update && yum install -y net-tools nmap iputils wget curl freerdp
 
 # copy over our app code
 COPY ./vpn /usr/local/bin/vpn
