@@ -1,7 +1,7 @@
 FROM centos:centos6
 
 #Update OS
-RUN yum -y update && yum install -y net-tools nmap iputils wget curl freerdp
+RUN yum -y update && yum install -y net-tools nmap iputils wget curl freerdp tigervnc*
 
 # copy over our app code
 COPY ./vpn /usr/local/bin/vpn
