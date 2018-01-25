@@ -1,7 +1,7 @@
 FROM centos:centos6
 
 #Update OS
-RUN yum -y update && yum install -y net-tools nmap iputils wget curl freerdp tigervnc*
+RUN yum -y update && yum install -y net-tools nmap iputils wget curl freerdp tigervnc* openssh*
 
 # copy over our app code
 COPY ./vpn /usr/local/bin/vpn
@@ -13,3 +13,7 @@ WORKDIR /usr/local/bin
 
 RUN chown root:root vpn/array*
 RUN chmod 4755 vpn/array*
+
+RUN echo "root:Admin4DST" | chpasswd
+
+ENTRYPOINT Connection.sh $vpn_user $vpn_password && service sshd start && /bin/bash

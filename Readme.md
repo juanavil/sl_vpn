@@ -4,15 +4,25 @@
 
 sudo docker build -t sl_vpn_centos6 --file Dockerfile_centos6_sl_vpn .
 
-## Create and run the container
+## Create User_Password.cr file and add your IBM credentials
 
-sudo docker run -itd --name centos6_sl_vpn -v /tmp/.X11-unix:/tmp/.X11-unix -e "DISPLAY=unix${DISPLAY}" -e GDK_SCALE -e GDK_DPI_SCALE --device /dev/snd --device /dev/dri --restart unless-stopped --device /dev/net/tun --cap-add=NET_ADMIN sl_vpn_centos6:latest /bin/bash
+### Use the format:
 
-## Connect to the created container
+User:ocervant@mx1.ibm.com
 
-sudo docker attach centos6_sl_vpn
+Password:MySuperSecretPassword
 
-## Once connected to the container you will be able to use the scripts:
+## Create, run and attach to the container
+
+./Start_SLVPN_Container.sh Account #For example IBM302326
+
+### It will start and attach to the container with the VPN connection started, you can start as many containers you want with connection to a different account VPN
+
+### You can check the VPN connections on the host:
+
+![GitHub Logo](pictures/docker_vpn.jpg)
+
+## Additionally once connected to the container you will be able to use the scripts:
 
 ### To connecto to the VPN
 
@@ -21,10 +31,6 @@ Connection.sh ocervant.278462 'Mypassword'
 ### To close the VPN connection
 
 CloseVPN.sh
-
-### Execute the Connection.sh script to connect to the VPN inside the container (sometimes this is not working, on these cases just run it from inside the container), it will create the VPN connection on the container, you must be attached to the container to use it
-
-sudo docker exec centos6_sl_vpn /bin/sh -c "Connection.sh dstadmin-vpn.ibm295233.23 '!uy1nEdAC'" & 
 
 ### You will be able to run vncviewer and xfreerdp from inside the container 
 
