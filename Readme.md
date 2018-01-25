@@ -34,6 +34,8 @@ CloseVPN.sh
 
 ### You will be able to run vncviewer and xfreerdp from inside the container 
 
+## If something failed, you can clean your docker environment using:
 
+sudo docker stop $(sudo docker ps -a -q) && sudo docker rm $(sudo docker ps -a -q)
 
 

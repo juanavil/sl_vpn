@@ -22,6 +22,13 @@ slidr_password=`./get_sl_pass2_original.sh $user_slidr $pass_slidr $id,$id,$id |
 
 echo "$slidr_username - $slidr_password"
 
+if [ -z "$slidr_username" ];
+then
+    echo "Unable to get SLIDR Id, please try again"
+    ./CleanSLIDRS.sh $id
+    exit 1
+fi
+
 tun_device=$id
 export vpn_user=$slidr_username #Get from slidrs script $slidrs_username
 export vpn_password="$slidr_password" #Get from slidrs script $slidrs_password
