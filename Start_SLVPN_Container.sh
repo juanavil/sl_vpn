@@ -13,6 +13,8 @@ elif [ "$#" -gt "1" ]; then
 fi 
 
 id=$1 #IBM295233
+low=$(echo "$id" | tr [[:upper:]] [[:lower:]])
+export term="$low"
 
 user_slidr=`grep "User" User_Password.cr | cut -d':' -f2`
 pass_slidr=`grep "Password" User_Password.cr | cut -d':' -f2`
@@ -37,6 +39,6 @@ sudo mknod /dev/net/tun${tun_device} c 10 200
 
 ## Create and run the container
 
-sudo docker run -itd --name centos6_sl_vpn_"$id" -v /tmp/.X11-unix:/tmp/.X11-unix -e vpn_user=$vpn_user -e vpn_password=$vpn_password -e "DISPLAY=unix${DISPLAY}" -e GDK_SCALE -e GDK_DPI_SCALE --device /dev/snd --device /dev/dri --restart unless-stopped --device /dev/net/tun${tun_device} --cap-add=NET_ADMIN sl_vpn_centos6:latest
+sudo docker run -itd -h "$term.dst.ibm.com" --name centos6_sl_vpn_"$id" -v /tmp/.X11-unix:/tmp/.X11-unix -e vpn_user=$vpn_user -e vpn_password=$vpn_password -e term=$term -e "DISPLAY=unix${DISPLAY}" -e GDK_SCALE -e GDK_DPI_SCALE --device /dev/snd --device /dev/dri --restart unless-stopped --device /dev/net/tun${tun_device} --cap-add=NET_ADMIN sl_vpn_centos6:latest
 
 sudo docker attach centos6_sl_vpn_"$id"

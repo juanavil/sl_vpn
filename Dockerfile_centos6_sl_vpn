@@ -16,4 +16,7 @@ RUN chmod 4755 vpn/array*
 
 RUN echo "root:Admin4DST" | chpasswd
 
+RUN echo 'PS1="\[$(tput setaf 3)$(tput bold)[\]vpn@\\h$:\\w]#\[$(tput sgr0) \]"' >> /root/.bashrc
+
+
 ENTRYPOINT Connection.sh $vpn_user $vpn_password && service sshd start && /bin/bash
